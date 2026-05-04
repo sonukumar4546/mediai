@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediAI — See a Doctor Today, From Anywhere</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="currentColor" opacity=".25"/><path d="M3.5 12c0 .8.1 1.57.27 2.32L7 12l2.5 3.5L12 10l2.5 5.5L16 12l2.5 1.5c.32-.79.5-1.63.5-2.5 0-4.14-3.36-7.5-7.5-7.5S4.5 7.86 4.5 12H3.5z" fill="currentColor"/></svg>
+        MediAI
+      </a>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#doctors">Doctors</a></li>
+        <li><a href="#symptoms">Symptoms</a></li>
+        <li><a href="#book-now">Book Now</a></li>
+      </ul>
+      <div class="nav-cta">
+        <button class="btn btn-ghost btn-sm" id="navLoginBtn" onclick="openAuthModal('login')">Log In</button>
+        <button class="btn btn-primary btn-sm" onclick="openBookModal()">Book Appointment</button>
+        <!-- User menu (shown when logged in) -->
+        <div class="user-menu hidden" id="userMenu">
+          <button class="user-avatar-btn" onclick="toggleUserDropdown()" id="userAvatarBtn">
+            <div class="nav-avatar" id="navAvatar">U</div>
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="user-dropdown hidden" id="userDropdown">
+            <div class="dropdown-name" id="dropdownName">Patient</div>
+            <a href="#" onclick="showSection('dashboard')">📊 Dashboard</a>
+            <a href="#" onclick="showSection('appointments')">📅 My Appointments</a>
+            <a href="#" onclick="showSection('symptomHistory')">🩺 Symptom History</a>
+            <a href="#" onclick="showSection('profile')">👤 My Profile</a>
+            <div class="dropdown-divider"></div>
+            <a href="#" onclick="logout()" class="logout-link">🚪 Sign Out</a>
+          </div>
+        </div>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home" onclick="closeMobile()">Home</a>
+    <a href="#how-it-works" onclick="closeMobile()">How It Works</a>
+    <a href="#doctors" onclick="closeMobile()">Doctors</a>
+    <a href="#symptoms" onclick="closeMobile()">Symptoms</a>
+    <a href="#book-now" onclick="closeMobile()">Book Now</a>
+    <div class="mobile-auth-btns">
+      <button class="btn btn-outline btn-sm" onclick="closeMobile();openAuthModal('login')">Log In</button>
+      <button class="btn btn-primary btn-sm" onclick="closeMobile();openBookModal()">Book Appointment</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============= MAIN LANDING PAGE ============= -->
+<div id="landingPage">
+
+<!-- ===================== HERO ===================== -->
+<section id="home" class="hero-section">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="tag fade-in">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="4"/></svg>
+          Available 24/7
+        </div>
+        <h1 class="hero-headline fade-in delay-1">See a Doctor <em>Today</em> — From Anywhere</h1>
+        <p class="hero-sub fade-in delay-2">AI-powered symptom checker + real doctor consultations. Book, pay, and consult — all in one place.</p>
+        <div class="hero-btns fade-in delay-3">
+          <button class="btn btn-primary" onclick="scrollTo('symptoms')">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            Check My Symptoms
+          </button>
+          <button class="btn btn-outline" onclick="scrollTo('doctors')">Browse Doctors</button>
+        </div>
+        <div class="trust-badges fade-in delay-4">
+          <div class="trust-badge">🔒 Secure Payments</div>
+          <div class="trust-badge">⚡ Instant Booking</div>
+          <div class="trust-badge">🎥 Video Consultations</div>
+          <div class="trust-badge">💊 Digital Prescriptions</div>
+        </div>
+      </div>
+      <div class="hero-card-wrap fade-in delay-2">
+        <div class="stat-float stat-float-1"><div class="stat-label">Patients Helped</div><div class="stat-value">24k <span>↑ 12%</span></div></div>
+        <div class="stat-float stat-float-2"><div class="stat-label">Avg. Wait Time</div><div class="stat-value">4 min</div></div>
+        <div class="hero-card">
+          <div class="hero-card-header">
+            <div class="hero-card-title">Live Consultation</div>
+            <div class="live-badge"><div class="live-dot"></div>LIVE</div>
+          </div>
+          <div class="video-area">
+            <div class="doctor-avatar-large">PS</div>
+            <div class="patient-pip">🧑</div>
+          </div>
+          <div class="card-info">
+            <div><div class="card-doc-name">Dr. Priya Sharma</div><div class="card-doc-spec">General Practitioner</div></div>
+            <div class="card-timer" id="heroTimer">08:24</div>
+          </div>
+          <div class="card-controls">
+            <button class="ctrl-btn gray"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg></button>
+            <button class="ctrl-btn gray"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg></button>
+            <button class="ctrl-btn blue"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg></button>
+            <button class="ctrl-btn red"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HOW IT WORKS ===================== -->
+<section id="how-it-works" class="section section--alt">
+  <div class="container">
+    <div class="fade-in"><div class="tag">Simple Process</div><h2 class="section-heading">Three Steps to Better Health</h2><p class="section-sub">From symptom check to prescription in minutes, not days.</p></div>
+    <div class="steps-grid">
+      <div class="step-card fade-in delay-1"><div class="step-num">1</div><div class="step-icon">📝</div><h3>Describe Symptoms</h3><p>AI analyzes your symptoms and recommends the right specialist for your condition.</p></div>
+      <div class="step-card fade-in delay-2"><div class="step-num">2</div><div class="step-icon">💳</div><h3>Pay &amp; Book</h3><p>Choose a doctor, pick a slot, and complete secure payment. Confirmed instantly.</p></div>
+      <div class="step-card fade-in delay-3"><div class="step-num">3</div><div class="step-icon">🎥</div><h3>Consult &amp; Get Prescription</h3><p>Video call with your doctor. Prescriptions stored in your personal dashboard.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== AI SYMPTOM CHECKER ===================== -->
+<section id="symptoms" class="section">
+  <div class="container">
+    <div class="fade-in"><div class="tag">AI-Powered</div><h2 class="section-heading">Not Sure What's Wrong?<br>Let AI Help.</h2><p class="section-sub">Describe your symptoms and receive instant triage, urgency assessment, and specialist recommendation.</p></div>
+    <div class="symptom-layout">
+      <div class="fade-in delay-1">
+        <div class="symptom-form">
+          <label class="form-label">Describe your symptoms</label>
+          <textarea class="form-textarea" id="symptomText" placeholder="e.g. I have had a persistent headache for 3 days, slight fever, and my neck feels stiff..." rows="5"></textarea>
+          <div class="form-row">
+            <div>
+              <label class="form-label">Age group</label>
+              <select class="form-select" id="ageSelect">
+                <option value="">Select age</option>
+                <option value="5">Under 18</option>
+                <option value="25">18–30</option>
+                <option value="40">31–50</option>
+                <option value="58">51–65</option>
+                <option value="70">65+</option>
+              </select>
+            </div>
+            <div>
+              <label class="form-label">Gender</label>
+              <select class="form-select" id="genderSelect">
+                <option value="">Select gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Non-binary</option>
+                <option>Prefer not to say</option>
+              </select>
+            </div>
+          </div>
+          <div style="margin-top:20px">
+            <button class="btn btn-primary" style="width:100%;justify-content:center" id="analyzeBtn" onclick="analyzeSymptoms()">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+              <span id="analyzeBtnText">Analyze Symptoms</span>
+            </button>
+          </div>
+
+          <!-- AI Result -->
+          <div class="ai-result hidden" id="aiResult">
+            <div class="result-header">
+              <div class="result-title">🤖 AI Analysis</div>
+              <div class="urgency-badge" id="urgencyBadge">Medium Urgency</div>
+            </div>
+            <div class="result-chips" id="resultChips"></div>
+            <p class="result-analysis" id="resultAnalysis"></p>
+            <div class="conditions-list" id="conditionsList"></div>
+            <button class="btn btn-primary btn-sm" style="margin-top:16px" id="bookFromSymptom" onclick="bookFromSymptomResult()">
+              Book Recommended Specialist →
+            </button>
+          </div>
+          <p class="disclaimer">⚕ <strong>Disclaimer:</strong> This is not a medical diagnosis. Always consult a licensed physician.</p>
+        </div>
+      </div>
+      <div class="symptom-visual fade-in delay-2">
+        <div class="feature-chip"><div class="chip-icon">🧠</div><div><h4>Trained on Clinical Data</h4><p>Thousands of verified medical cases for accurate triage.</p></div></div>
+        <div class="feature-chip"><div class="chip-icon">⚡</div><div><h4>Instant Results</h4><p>Get a detailed analysis in seconds — no waiting rooms.</p></div></div>
+        <div class="feature-chip"><div class="chip-icon">🔒</div><div><h4>Private &amp; Secure</h4><p>Your health data is encrypted and never sold.</p></div></div>
+        <div class="feature-chip"><div class="chip-icon">🩺</div><div><h4>Doctor-Reviewed Logic</h4><p>Every AI pathway validated by board-certified physicians.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DOCTORS ===================== -->
+<section id="doctors" class="section section--alt">
+  <div class="container">
+    <div class="fade-in"><div class="tag">Our Network</div><h2 class="section-heading">Meet Our Doctors</h2><p class="section-sub">Board-certified physicians available for video consultations. All verified and licensed.</p></div>
+    <!-- Filter -->
+    <div class="doctor-filters fade-in">
+      <input class="filter-search" type="text" id="doctorSearch" placeholder="🔍  Search by name or specialty..." oninput="filterDoctors()" />
+      <select class="filter-select" id="specialtyFilter" onchange="filterDoctors()">
+        <option value="all">All Specialties</option>
+      </select>
+    </div>
+    <div class="doctors-grid" id="doctorsGrid">
+      <div class="loading-spinner"><div class="spinner"></div><p>Loading doctors...</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FEATURES ===================== -->
+<section id="features" class="section">
+  <div class="container">
+    <div class="fade-in"><div class="tag">Platform</div><h2 class="section-heading">Everything You Need, Built In</h2><p class="section-sub">AI triage, secure payments, and real doctor care in one seamless platform.</p></div>
+    <div class="features-grid">
+      <div class="feature-card fade-in delay-1"><div class="feature-icon">🤖</div><div><h3>AI Symptom Checker</h3><p>Instant triage before booking. Urgency levels, specialty recommendations, and condition analysis.</p></div></div>
+      <div class="feature-card fade-in delay-2"><div class="feature-icon">💳</div><div><h3>Pay Before You Book</h3><p>Secure payments guarantee your slot. Transparent pricing, no surprise bills.</p></div></div>
+      <div class="feature-card fade-in delay-3"><div class="feature-icon">💊</div><div><h3>Digital Prescriptions</h3><p>Stored securely in your account. AI explains each medication in plain language.</p></div></div>
+      <div class="feature-card fade-in delay-4"><div class="feature-icon">🎥</div><div><h3>Video Consultation Storage</h3><p>Recordings saved to your private health dashboard, accessible anytime.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TESTIMONIALS ===================== -->
+<section id="testimonials" class="section section--alt">
+  <div class="container">
+    <div class="fade-in"><div class="tag">Patient Stories</div><h2 class="section-heading">What Our Patients Say</h2></div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-in delay-1"><div class="test-stars">★★★★★</div><p class="test-quote">"The symptom checker caught something my local clinic missed for weeks. I had a specialist consultation the same day. Never waiting in a queue again."</p><div class="test-author"><div class="test-avatar" style="background:#DBEAFE;color:#1D4ED8">AK</div><div><div class="test-name">Arjun Kapoor</div><div class="test-label">Patient, Mumbai</div></div></div></div>
+      <div class="testimonial-card fade-in delay-2"><div class="test-stars">★★★★★</div><p class="test-quote">"Living in a small town, a cardiologist felt impossible. MediAI connected me with Dr. Mehta in minutes. The prescription was on my phone before the call ended."</p><div class="test-author"><div class="test-avatar" style="background:#F3E8FF;color:#7C3AED">SN</div><div><div class="test-name">Sneha Nair</div><div class="test-label">Patient, Kochi</div></div></div></div>
+      <div class="testimonial-card fade-in delay-3"><div class="test-stars">★★★★☆</div><p class="test-quote">"The booking flow is flawless and the doctors actually listen. Diagnosed correctly on the first try. The AI explanation of my prescription was a wonderful bonus."</p><div class="test-author"><div class="test-avatar" style="background:#CCFBF1;color:#0D9488">RV</div><div><div class="test-name">Rohan Verma</div><div class="test-label">Patient, Pune</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA BANNER ===================== -->
+<section id="book-now" class="cta-banner">
+  <div class="container fade-in" style="text-align:center">
+    <div class="tag" style="display:table;margin:0 auto 16px">Start Today</div>
+    <h2>Ready to See a Doctor?</h2>
+    <p>Join thousands of patients getting quality care from the comfort of home.</p>
+    <button class="btn btn-primary" onclick="openBookModal()">
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+      Book Your Appointment
+    </button>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div><div class="footer-logo">Medi<span>AI</span></div><div class="footer-tagline">Quality healthcare, from anywhere.</div></div>
+      <nav class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Contact Us</a></nav>
+    </div>
+    <div class="footer-copy">© 2025 MediAI. All rights reserved. Not a substitute for professional medical advice, diagnosis, or treatment.</div>
+  </div>
+</footer>
+</div><!-- end #landingPage -->
+
+<!-- =================== DASHBOARD SECTIONS =================== -->
+<div id="appSections" class="hidden">
+  <!-- Dashboard -->
+  <div id="dashboardSection" class="app-section hidden">
+    <div class="container section">
+      <h2 class="section-heading" style="margin-bottom:8px">Welcome back, <span id="dashName">Patient</span> 👋</h2>
+      <p style="margin-bottom:36px">Here's your health overview.</p>
+      <div class="stats-row" id="dashStats"></div>
+      <h3 style="font-size:20px;margin:36px 0 16px">Upcoming Appointments</h3>
+      <div id="dashUpcoming"></div>
+    </div>
+  </div>
+
+  <!-- Appointments -->
+  <div id="appointmentsSection" class="app-section hidden">
+    <div class="container section">
+      <h2 class="section-heading" style="margin-bottom:8px">My Appointments</h2>
+      <p style="margin-bottom:28px">All your past and upcoming consultations.</p>
+      <div class="appt-filters">
+        <button class="filter-tab active" onclick="filterAppts('all',this)">All</button>
+        <button class="filter-tab" onclick="filterAppts('confirmed',this)">Upcoming</button>
+        <button class="filter-tab" onclick="filterAppts('completed',this)">Completed</button>
+        <button class="filter-tab" onclick="filterAppts('cancelled',this)">Cancelled</button>
+      </div>
+      <div id="apptList"></div>
+    </div>
+  </div>
+
+  <!-- Symptom History -->
+  <div id="symptomHistorySection" class="app-section hidden">
+    <div class="container section">
+      <h2 class="section-heading" style="margin-bottom:8px">Symptom History</h2>
+      <p style="margin-bottom:28px">All your past AI symptom analyses.</p>
+      <div id="symptomHistoryList"></div>
+    </div>
+  </div>
+
+  <!-- Profile -->
+  <div id="profileSection" class="app-section hidden">
+    <div class="container section" style="max-width:600px">
+      <h2 class="section-heading" style="margin-bottom:8px">My Profile</h2>
+      <p style="margin-bottom:28px">Manage your personal information.</p>
+      <div class="profile-card">
+        <div class="profile-avatar" id="profileAvatar">U</div>
+        <div class="profile-form">
+          <div class="modal-field"><label>Full Name</label><input class="modal-input" id="profileName" type="text" /></div>
+          <div class="modal-field"><label>Email</label><input class="modal-input" id="profileEmail" type="email" disabled style="opacity:.6" /></div>
+          <div class="modal-grid">
+            <div class="modal-field"><label>Phone</label><input class="modal-input" id="profilePhone" type="tel" /></div>
+            <div class="modal-field"><label>Date of Birth</label><input class="modal-input" id="profileDob" type="date" /></div>
+          </div>
+          <div class="modal-field"><label>Gender</label>
+            <select class="modal-input" id="profileGender">
+              <option value="">Select</option>
+              <option>Male</option><option>Female</option><option>Non-binary</option><option>Prefer not to say</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" style="margin-top:8px" onclick="saveProfile()">Save Changes</button>
+          <div class="success-msg hidden" id="profileMsg">✅ Profile updated successfully!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =================== MODALS =================== -->
+
+<!-- Auth Modal -->
+<div class="modal-overlay hidden" id="authModal" onclick="handleOverlayClick(event,'authModal')">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" id="authTitle">Log In</h2>
+      <button class="modal-close" onclick="closeModal('authModal')">✕</button>
+    </div>
+    <!-- Tabs -->
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="loginTab" onclick="switchAuth('login')">Log In</button>
+      <button class="auth-tab" id="registerTab" onclick="switchAuth('register')">Register</button>
+    </div>
+    <!-- Login Form -->
+    <div id="loginForm">
+      <div class="modal-body">
+        <div class="modal-field"><label>Email</label><input class="modal-input" id="loginEmail" type="email" placeholder="you@example.com" /></div>
+        <div class="modal-field"><label>Password</label><input class="modal-input" id="loginPassword" type="password" placeholder="••••••••" /></div>
+        <div class="auth-hint">Demo: patient@mediai.com / patient123</div>
+      </div>
+      <div class="modal-footer"><button class="btn btn-primary" style="width:100%;justify-content:center" id="loginBtn" onclick="login()">Log In</button></div>
+    </div>
+    <!-- Register Form -->
+    <div id="registerForm" class="hidden">
+      <div class="modal-body">
+        <div class="modal-field"><label>Full Name</label><input class="modal-input" id="regName" type="text" placeholder="Your full name" /></div>
+        <div class="modal-field"><label>Email</label><input class="modal-input" id="regEmail" type="email" placeholder="you@example.com" /></div>
+        <div class="modal-grid">
+          <div class="modal-field"><label>Phone</label><input class="modal-input" id="regPhone" type="tel" placeholder="10-digit number" /></div>
+          <div class="modal-field"><label>Gender</label>
+            <select class="modal-input" id="regGender"><option value="">Select</option><option>Male</option><option>Female</option><option>Non-binary</option></select>
+          </div>
+        </div>
+        <div class="modal-field"><label>Password</label><input class="modal-input" id="regPassword" type="password" placeholder="Min. 6 characters" /></div>
+      </div>
+      <div class="modal-footer"><button class="btn btn-primary" style="width:100%;justify-content:center" id="registerBtn" onclick="register()">Create Account</button></div>
+    </div>
+    <div class="auth-error hidden" id="authError"></div>
+  </div>
+</div>
+
+<!-- Booking Modal -->
+<div class="modal-overlay hidden" id="bookModal" onclick="handleOverlayClick(event,'bookModal')">
+  <div class="modal">
+    <!-- Form state -->
+    <div id="bookFormState">
+      <div class="modal-header">
+        <h2 class="modal-title">Book Appointment</h2>
+        <button class="modal-close" onclick="closeModal('bookModal')">✕</button>
+      </div>
+      <div class="book-doctor-info hidden" id="bookDoctorInfo"></div>
+      <div class="modal-body">
+        <div class="modal-field"><label>Doctor</label>
+          <select class="modal-input" id="bookDoctorSelect" onchange="loadSlots()">
+            <option value="">Select a doctor...</option>
+          </select>
+        </div>
+        <div class="modal-field"><label>Your Name</label><input class="modal-input" id="bookName" type="text" placeholder="Full name" /></div>
+        <div class="modal-field"><label>Email</label><input class="modal-input" id="bookEmail" type="email" placeholder="you@example.com" /></div>
+        <div class="modal-grid">
+          <div class="modal-field"><label>Date</label><input class="modal-input" id="bookDate" type="date" onchange="loadSlots()" /></div>
+          <div class="modal-field"><label>Time Slot</label>
+            <select class="modal-input" id="bookTime"><option value="">Select date first</option></select>
+          </div>
+        </div>
+        <div class="modal-field"><label>Reason / Symptoms (optional)</label><textarea class="modal-input" id="bookReason" rows="2" placeholder="Brief description of your concern..."></textarea></div>
+      </div>
+      <div class="book-fee-row" id="bookFeeRow" style="display:none">
+        <span>Consultation Fee:</span>
+        <strong id="bookFeeAmt">₹0</strong>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline btn-sm" onclick="closeModal('bookModal')">Cancel</button>
+        <button class="btn btn-primary btn-sm" id="confirmBookBtn" onclick="confirmBooking()">Confirm &amp; Pay</button>
+      </div>
+      <div class="auth-error hidden" id="bookError"></div>
+    </div>
+    <!-- Success -->
+    <div class="modal-success hidden" id="bookSuccessState">
+      <div class="success-icon">🎉</div>
+      <h3>Appointment Confirmed!</h3>
+      <p>Your appointment has been booked and confirmed. You'll receive a video call link shortly.</p>
+      <div class="meeting-link-box" id="meetingLinkBox"></div>
+      <button class="btn btn-primary" style="margin-top:16px" onclick="closeModal('bookModal');showSection('appointments')">View My Appointments</button>
+    </div>
+  </div>
+</div>
+
+<!-- Doctor Detail Modal -->
+<div class="modal-overlay hidden" id="doctorModal" onclick="handleOverlayClick(event,'doctorModal')">
+  <div class="modal modal-wide">
+    <div class="modal-header">
+      <h2 class="modal-title" id="docModalName">Doctor</h2>
+      <button class="modal-close" onclick="closeModal('doctorModal')">✕</button>
+    </div>
+    <div id="docModalBody"></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast hidden"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
