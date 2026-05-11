@@ -194,8 +194,8 @@ function showSection(name) {
   document.getElementById('userDropdown').classList.add('hidden');
   if (!currentUser) { openAuthModal('login'); return; }
   document.getElementById('landingPage').classList.add('hidden');
-  document.getElementById('appSections').classList.remove('hidden');
   hideAllAppSections();
+  document.getElementById('appSections').classList.remove('hidden');
   window.scrollTo(0, 0);
   switch (name) {
     case 'dashboard':     showDashboard();         break;

@@ -1,4 +1,5 @@
 {"name":"Demo Patient","email":"patient@mediai.com","password":"$2a$10$f9i2zt3DlAAzRo1TQTC0UecFy13X40ZuSPgDTFSwOh.bJnFuuH2Wq","phone":"9876543210","dob":"1990-05-15","gender":"Male","createdAt":"2026-05-03T18:15:02.163Z","_id":"K3GpAYjvUXZhHZkP"}
 {"name":"sonu kumar","email":"sk7002208@gmail.com","password":"$2a$10$hRx5x0omTJ.wwgsvdj0gMeFkQMVPAdcmJzTR2SuFEkHHemVRady4e","phone":"8102181182","dob":"","gender":"Male","createdAt":"2026-05-03T18:27:17.144Z","_id":"XOVNmYLl7T1ss88j"}
-{"$$indexCreated":{"fieldName":"email","unique":true,"sparse":false}}
 {"name":"Shashank Rator","email":"shashankrathore@gmail.com","password":"$2a$10$BL0LdlcPxDKi8oZm5cMZruVOnTSasjgCWI3QpA3Q7DAspXx8qDHvy","phone":"9575850753","dob":"","gender":"Male","createdAt":"2026-05-04T09:33:54.546Z","_id":"ewB5enLDGAupeqYX"}
+{"$$indexCreated":{"fieldName":"email","unique":true,"sparse":false}}
+{"name":"Demo Patient","email":"patient@mediai.com","password":"$2a$10$f9i2zt3DlAAzRo1TQTC0UecFy13X40ZuSPgDTFSwOh.bJnFuuH2Wq","phone":"9876543210","dob":"1990-05-15","gender":"Male","createdAt":"2026-05-03T18:15:02.163Z","_id":"K3GpAYjvUXZhHZkP"}

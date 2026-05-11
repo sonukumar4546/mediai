@@ -39,7 +39,7 @@ app.use('/api/symptoms',     symptomRoutes);
 app.get('/api/health', (req, res) => res.json({ status: 'ok', timestamp: new Date().toISOString() }));
 
 // ── SPA Fallback — serve index.html for all non-API routes ───────────────────
-app.get('/{*splat}', (req, res) => {
+app.get('*', (req, res) => {
   if (!req.path.startsWith('/api')) {
     res.sendFile(path.join(__dirname, 'frontend', 'public', 'index.html'));
   } else {

@@ -135,7 +135,7 @@ router.post('/analyze', async (req, res) => {
           result,
           createdAt: new Date().toISOString(),
         });
-      } catch {}
+      } catch (err) {}
     }
 
     res.json(result);
