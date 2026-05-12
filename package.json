@@ -21,5 +21,8 @@
     "nedb-promises": "^6.2.3",
     "nodemailer": "^6.9.13",
     "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@vercel/node": "latest"
   }
 }
