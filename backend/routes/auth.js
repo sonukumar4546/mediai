@@ -38,7 +38,8 @@ router.post('/register', [
       createdAt: new Date().toISOString(),
     });
 
-    const token = jwt.sign({ id: user._id, email: user.email, name: user.name }, process.env.JWT_SECRET, { expiresIn: '7d' });
+    const secret = process.env.JWT_SECRET || 'mediai_super_secret_jwt_key_2025_change_in_production';
+    const token = jwt.sign({ id: user._id, email: user.email, name: user.name }, secret, { expiresIn: '7d' });
     res.status(201).json({ token, user: { id: user._id, name: user.name, email: user.email } });
   } catch (err) {
     console.error(err);
@@ -63,7 +64,8 @@ router.post('/login', [
     const match = await bcrypt.compare(password, user.password);
     if (!match) return res.status(401).json({ error: 'Invalid credentials' });
 
-    const token = jwt.sign({ id: user._id, email: user.email, name: user.name }, process.env.JWT_SECRET, { expiresIn: '7d' });
+    const secret = process.env.JWT_SECRET || 'mediai_super_secret_jwt_key_2025_change_in_production';
+    const token = jwt.sign({ id: user._id, email: user.email, name: user.name }, secret, { expiresIn: '7d' });
     res.json({ token, user: { id: user._id, name: user.name, email: user.email, phone: user.phone, gender: user.gender } });
   } catch (err) {
     console.error(err);

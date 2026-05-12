@@ -26,6 +26,20 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Lazy DB seeding for Vercel serverless environment
+let isSeeded = false;
+app.use(async (req, res, next) => {
+  if (!isSeeded) {
+    try {
+      await seedDatabase();
+      isSeeded = true;
+    } catch (e) {
+      console.error('Failed to seed database:', e);
+    }
+  }
+  next();
+});
+
 // Serve static frontend
 app.use(express.static(path.join(__dirname, '..', 'frontend', 'public')));
 

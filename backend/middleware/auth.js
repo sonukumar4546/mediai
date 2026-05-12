@@ -3,6 +3,7 @@
  * JWT authentication middleware
  */
 
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
 function authMiddleware(req, res, next) {
@@ -10,14 +11,19 @@ function authMiddleware(req, res, next) {
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return res.status(401).json({ error: 'No token provided' });
   }
+  
   const token = authHeader.split(' ')[1];
+  const secret = process.env.JWT_SECRET || 'mediai_super_secret_jwt_key_2025_change_in_production';
+  
+  let decoded;
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
-    next();
+    decoded = jwt.verify(token, secret);
   } catch (err) {
     return res.status(401).json({ error: 'Invalid or expired token' });
   }
+  
+  req.user = decoded;
+  next();
 }
 
 module.exports = authMiddleware;

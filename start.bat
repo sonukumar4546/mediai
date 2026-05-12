@@ -9,4 +9,7 @@ call npm install
 echo [2/2] Starting the server...
 call npm start
 
-paus
+pause     
+
+
+
