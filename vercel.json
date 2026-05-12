@@ -16,12 +16,8 @@
       "destination": "server.js"
     },
     {
-      "source": "/((?!api/).*)",
+      "source": "/(.*)",
       "destination": "/frontend/public/$1"
-    },
-    {
-        "source": "/",
-        "destination": "/frontend/public/index.html"
     }
   ]
 }

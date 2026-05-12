@@ -8,7 +8,7 @@ const Datastore = require('nedb-promises');
 const path = require('path');
 const bcrypt = require('bcryptjs');
 
-const DB_DIR = path.join(__dirname, 'data');
+const DB_DIR = process.env.NODE_ENV === 'production' ? '/tmp' : path.join(__dirname, 'data');
 
 // ── Collections (equivalent to SQL tables) ──────────────────────────────────
 const db = {
