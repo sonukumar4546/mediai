@@ -29,6 +29,14 @@ async function apiFetch(path, opts = {}) {
     ...opts,
     body: opts.body ? JSON.stringify(opts.body) : undefined,
   });
+
+  const contentType = res.headers.get('content-type');
+  if (!contentType || !contentType.includes('application/json')) {
+    const text = await res.text();
+    console.error('Expected JSON but got:', text);
+    throw new Error(`Server returned non-JSON response. Status: ${res.status}`);
+  }
+
   const data = await res.json();
   if (!res.ok) throw new Error(data.error || data.errors?.[0]?.msg || 'Request failed');
   return data;

@@ -10,13 +10,13 @@ require('dotenv').config();
 const express  = require('express');
 const cors     = require('cors');
 const path     = require('path');
-const { seedDatabase } = require('./database/db');
+const { seedDatabase } = require('../database/db');
 
 // ── Routes ───────────────────────────────────────────────────────────────────
-const authRoutes         = require('./backend/routes/auth');
-const doctorRoutes       = require('./backend/routes/doctors');
-const appointmentRoutes  = require('./backend/routes/appointments');
-const symptomRoutes      = require('./backend/routes/symptoms');
+const authRoutes         = require('../backend/routes/auth');
+const doctorRoutes       = require('../backend/routes/doctors');
+const appointmentRoutes  = require('../backend/routes/appointments');
+const symptomRoutes      = require('../backend/routes/symptoms');
 
 const app  = express();
 const PORT = process.env.PORT || 3000;
@@ -27,7 +27,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve static frontend
-app.use(express.static(path.join(__dirname, 'frontend', 'public')));
+app.use(express.static(path.join(__dirname, '..', 'frontend', 'public')));
 
 // ── API Routes ────────────────────────────────────────────────────────────────
 app.use('/api/auth',         authRoutes);
@@ -41,23 +41,27 @@ app.get('/api/health', (req, res) => res.json({ status: 'ok', timestamp: new Dat
 // ── SPA Fallback — serve index.html for all non-API routes ───────────────────
 app.get('*', (req, res) => {
   if (!req.path.startsWith('/api')) {
-    res.sendFile(path.join(__dirname, 'frontend', 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, '..', 'frontend', 'public', 'index.html'));
   } else {
     res.status(404).json({ error: 'API endpoint not found' });
   }
 });
 
-// ── Start ─────────────────────────────────────────────────────────────────────
-async function start() {
-  await seedDatabase();
-  app.listen(PORT, () => {
-    console.log(`\n🏥 MediAI server running at http://localhost:${PORT}`);
-    console.log(`📂 API docs: http://localhost:${PORT}/api/health`);
-    console.log(`🗄️  Database: ./database/data/\n`);
+// Export for Vercel
+module.exports = app;
+
+// ── Start (Only if running locally) ──────────────────────────────────────────
+if (process.env.NODE_ENV !== 'production') {
+  async function start() {
+    await seedDatabase();
+    app.listen(PORT, () => {
+      console.log(`\n🏥 MediAI server running at http://localhost:${PORT}`);
+      console.log(`📂 API docs: http://localhost:${PORT}/api/health`);
+    });
+  }
+
+  start().catch(err => {
+    console.error('Failed to start server:', err);
+    process.exit(1);
   });
 }
-
-start().catch(err => {
-  console.error('Failed to start server:', err);
-  process.exit(1);
-});
